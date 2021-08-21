@@ -1,0 +1,181 @@
+@import url("https://fonts.googleapis.com/css?family=Lato");
+
+
+.lato{
+    font-family: 'Lato';
+    font-style: 'Lato-Black';
+    font-weight: 900;
+}
+
+.headerline {
+   height: 5px,
+   background-color: #000000;
+}
+.image {
+    margin-top: 110px;
+    padding-top: : 50px;
+    width: 200px;
+}
+
+
+@font-face {
+    font-family: 'Lato';
+    font-style: bold;
+    font-weight: 1100;
+    src: local('Lato Black'), local('Lato-Black'), url(https://fonts.gstatic.com/s/lato/v14/S6u9w4BMUTPHh50XSwaPGQ3q5d0N7w.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  @font-face {
+    font-family: 'Lato';
+    font-style: bold;
+    font-weight: 1100;
+    src: local('Lato Black'), local('Lato-Black'), url(https://fonts.gstatic.com/s/lato/v14/S6u9w4BMUTPHh50XSwiPGQ3q5d0.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
+@media (max-width: 576px) { 
+    /*SMALL*/
+    .buttonview{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .cta{
+    
+        text-align: center;
+    }
+    .mytittle {
+        text-align: center;
+        color: black;
+        font-size: 10px;
+        margin-top: 40px;
+    }
+    .bigtext{
+        text-align: center;
+        color: black;
+        font-size: 55px;
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (min-width: 768px) {
+     /*MEDIUM*/
+    .buttonview{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .cta{
+        text-align: center;
+    }
+    .mytittle{
+        text-align: center;
+        color: black;
+        font-size: 16px;
+        margin-left: 10px;
+        margin-top: 40px;
+    }
+    .bigtext{
+        text-align: center;
+        color: black;
+        font-size: 55px;
+        margin-left: 40px;
+        margin-right: 40px;
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (min-width: 992px){
+    /*LARGE*/
+    .mytittle{
+        color: black;
+        text-align: start;
+        font-size: 16px;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+    .bigtext{
+        color: black;
+        text-align: start;
+        font-size: 80px;
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    /*EXTRA LARGE*/
+    .mytittle{
+        color: black;
+        text-align: start;
+        font-size: 16px;
+        margin-left: 10px;
+        margin-top: 30px;
+    }
+    .bigtext{
+        color: black;
+        text-align: start;
+        font-size: 80px;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+}
+.mytittle {
+      
+        color: black;
+        font-size: 10px;
+        margin-top: 40px;
+}
+.bigtext{
+       
+        color: black;
+        font-size: 55px;
+        margin-top: 30px;
+        margin-bottom: 20px;
+}
+.cta {
+    margin-top: 20px;
+    color: white;
+    width: 150px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 40px;
+    padding-right: 30px;
+    margin-left: 4px;
+    padding-left: 30px;
+    padding-top: 11px;
+    padding-bottom:  11px;
+    background-color: #dd48a3;
+}
+.cta:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #67e68d;
+    border-color: #67e68d; /*set the color you want here*/
+}
+.mytittle{
+    color: black;
+    font-size: 16px;
+    margin-left: 10px;
+    margin-top: 60px;
+}
+
+.mytittle span { 
+    background-color: #36d1ff;
+    padding-right: 8px;
+    padding-left: 8px;
+    padding-bottom: 8px;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+
+ 
