@@ -12,8 +12,24 @@
    background-color: #000000;
 }
 .image {
-  
     width: 400px;
+}
+.text-my-own-color:hover, .text-my-own-color:active {
+  color:  #dd48a3 !important; // Define your own color's darkening/lightening in your CSS
+}
+
+.navbar-nav>li{
+  border-left: 1px solid #000000;
+}
+
+.faq {
+    text-align: center;
+    color: black;
+    font-size: 16px;
+    color: inherit;
+    margin-right: 50px;
+    margin-left: 50px;
+
 }
 
 
