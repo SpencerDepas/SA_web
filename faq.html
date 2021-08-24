@@ -72,7 +72,7 @@
             This alarm triggers when a stock price moves by a specified dollar amount or percentage in either direction.  
             <br />
             <strong>Example</strong>: stock price is $100. Both Upper and Lower limits are set at $2.
-            An alarm will sound when the stock price meets or exceeds $102 or meets or drops below $98 
+            An alarm will sound when the stock price meets or exceeds $102 or meets or drops at or below $98 
         </div>
     </p>
     <p>
@@ -108,6 +108,24 @@ To get an alert in both directions, you will need to set two alarms (<strong>see
         <div class="lato font-weight-bold underline">Trailing Alarms</div>
         <div>
             This style alarm works best when you’ve already placed an order with your broker that has automatic buying or selling limits in place which execute if the stock dips or rises by a specified dollar amount or percentage change.
+        </div>
+    </p>
+    <p>
+        <div class="lato font-weight-bold underline">Volume Percent Change</div>
+        <div>
+            This alarm triggers when the volume of a stock moves by specified percentage. When a limit is hit or exceeded, a message is sent with the volume difference and current price
+        </div>
+    </p>
+    <p>
+        <div class="lato font-weight-bold underline">Volume Percent Deviation</div>
+        <div>
+            This alarm triggers when the volume of a stock deviates by a set percentage from the 30-day average
+        </div>
+    </p>
+    <p>
+        <div class="lato font-weight-bold underline">Volume 24-hour Dip/Spike</div>
+        <div>
+            This alarm triggers when the volume of a stock spikes or dips by a set percentage from the prior days average volume.
         </div>
     </p>
 </body>
