@@ -27,6 +27,7 @@
             }
             .underline {
                 text-decoration: underline;
+                font-size: large;
             }
     </style>
 </head>
@@ -69,14 +70,14 @@
         <div>
             This alarm triggers when a stock price moves by a specified dollar amount or percentage in either direction.  
             <br />
-            <strong>Example</strong>: stock price is $100. Both Upper and Lower limits are set at $2 from the user input.
-            An alarm will sound when the stock price meets or exceeds 102 or meets or drops below 98 
+            <strong>Example</strong>: stock price is $100. Both Upper and Lower limits are set at $2.
+            An alarm will sound when the stock price meets or exceeds $102 or meets or drops below $98 
         </div>
     </p>
     <p>
         <div class="lato font-weight-bold underline">24-hour Price/Percent Change</div>
         <div>
-            This alarm measures a price or percent change in a single 24-hour period
+            This alarm measures a price or percent change in a single 24-hour period.
 Unlike regular price/percent change alarms, the app saves the most recent price every 24-hours whether the limit is hit or not. 
   
             <br />
@@ -102,6 +103,12 @@ To get an alert in both, you will need to set two alarms (see image below).<br /
 <i>Using two alarms to create a price spread (with support on the bottom and resistance on the top) may help an investor detect breakouts in either direction or show how a stock drifts sideways.</i>
         </div>
         <img src="PriceTarget.png" width="500" />
+    </p>
+    <p>
+        <div class="lato font-weight-bold underline">Trailing Alarms</div>
+        <div>
+            This style alarm works best when you’ve already placed an order with your broker that has automatic buying or selling limits in place which execute if the stock dips or rises by a specified dollar amount or percentage change.
+        </div>
     </p>
 </body>
 
