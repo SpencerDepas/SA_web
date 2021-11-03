@@ -7,6 +7,21 @@
     font-weight: 900;
 }
 
+.latoNormal{
+    font-family: 'Lato';
+    font-style: 'Lato-Black';
+    font-weight: 400;
+}
+
+.teslaImage {
+   border-radius: 5%;
+    margin-right: 50px;
+    margin-left: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+
 .headerline {
    height: 5px,
    background-color: #000000;
@@ -32,6 +47,11 @@
 
 }
 
+.center-block {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
 .mynavbar {
     height:40px;
 }
@@ -45,13 +65,44 @@
     text-align: center;
     color: #FFFFFF;
     font-size: 40px;
-    margin-top: 30px;
+    margin-top: 50px;
+    margin-right: 120px;
+    margin-left: 120px;
+    margin-bottom: 50px;
+}
+.form{
+    text-align: center;
+
 }
 
 .teslaButton{
     text-align: center;
     background-color: #416ede;
+    border-radius: 40px;
+    text-align: center;
+    margin-top: 16px;
+    width: 400px;
 }
+
+.email{
+    text-align: center;
+    background-color: #222222;
+        border-color: #222222;
+      width: 400px;
+    border-radius: 40px;
+    text-align: center;
+}
+
+.email:hover, .email:focus,  .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    outline: none !important;
+    border-color: #cc0000;
+    background-color: #222222;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+
 
 @font-face {
     font-family: 'Lato';
