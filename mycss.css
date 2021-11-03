@@ -52,6 +52,9 @@
   margin-right: auto;
   margin-left: auto;
 }
+.teslanavbar {
+    height:40px;
+}
 .mynavbar {
     height:40px;
 }
@@ -126,6 +129,18 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
+    }
+    .bigtextwhite{
+        margin-right: 20px;
+        margin-left: 20px;
+        margin-bottom: 20px;
+    }
+    .teslaButton{
+        width: 300px;
+    }
+
+    .email{
+        width: 300px;
     }
     .image {
         width: 250px;
