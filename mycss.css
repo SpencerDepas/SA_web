@@ -35,6 +35,23 @@
 .mynavbar {
     height:40px;
 }
+.teslaHeading {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    margin-top: 40px;
+}
+.bigtextwhite{
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 40px;
+    margin-top: 30px;
+}
+
+.teslaButton{
+    text-align: center;
+    background-color: #416ede;
+}
 
 @font-face {
     font-family: 'Lato';
@@ -82,6 +99,8 @@
         color: black;
         font-size: 8px;
         margin-top: 40px;
+    }
+    margin-bottom: 20px;
     }
     .bigtext{
         text-align: center;
