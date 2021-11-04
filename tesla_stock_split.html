@@ -33,6 +33,31 @@
  
 <body>
 
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyBWoanAOoR7pizrMD5d8DwVUQefAh6isnM",
+        authDomain: "smart-notifications-marketing.firebaseapp.com",
+        databaseURL: "https://smart-notifications-marketing-default-rtdb.firebaseio.com",
+        projectId: "smart-notifications-marketing",
+        storageBucket: "smart-notifications-marketing.appspot.com",
+        messagingSenderId: "377643408726",
+        appId: "1:377643408726:web:2fcbfcc73b6f2b8bd08af7",
+        measurementId: "G-23Q6LCW38C"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+
     <nav class="navbar">
 
         <a href="index.html"><img src="heading___logo_tesla.png" class="teslanavbar" /></a>
