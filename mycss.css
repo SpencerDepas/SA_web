@@ -26,6 +26,7 @@
    height: 5px,
    background-color: #000000;
 }
+
 .image {
     width: 400px;
 }
@@ -63,6 +64,7 @@
     color: white;
     font-size: 20px;
     margin-top: 40px;
+    margin-bottom: 40px;
 }
 .bigtextwhite{
     text-align: center;
@@ -78,6 +80,10 @@
 
 }
 
+input, select, textarea{
+    color: #FFFFFF;
+}
+
 .teslaButton{
     text-align: center;
     background-color: #416ede;
@@ -90,15 +96,18 @@
 .email{
     text-align: center;
     background-color: #222222;
-        border-color: #222222;
-      width: 400px;
+    border-color: #222222;
+    width: 400px;
+    color: white;
     border-radius: 40px;
+    margin-bottom: 20px;
     text-align: center;
 }
 
 .email:hover, .email:focus,  .btn-primary.active, .open>.dropdown-toggle.btn-primary {
     outline: none !important;
     border-color: #cc0000;
+    color: #FFFFFF;
     background-color: #222222;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
@@ -274,8 +283,8 @@
 }
 .cta:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
     color: #fff;
-    background-color: #67e68d;
-    border-color: #67e68d; /*set the color you want here*/
+    background-color: #416ede;
+    border-color: #416ede; /*set the color you want here*/
 }
 .mytittle{
     color: black;
