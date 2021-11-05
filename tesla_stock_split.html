@@ -70,6 +70,8 @@
 
         import {initializeApp} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
         import {getAnalytics} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-analytics.js";
+        import {getAuth, signInAnonymously, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
+
         import {getDatabase, ref, set, child, update, remove} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 
         const firebaseConfig = {
@@ -96,10 +98,7 @@
 
 
         async function InsetData() {
-            console.log("InsetData");
-
             const isValidEmail = emailInput.checkValidity();
-
 
             if (isValidEmail) {
                 const db = getDatabase();
@@ -118,6 +117,30 @@
                 console.log("done");
             }
         }
+
+        const auth = getAuth();
+        var uid = "";
+
+
+        signInAnonymously(auth)
+            .then(() => {
+                //alert("Signed in");
+                console.log("done");
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert("errorMessage : " + errorMessage);
+            });
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                uid = user.uid;
+            } else {
+                alert("errorMessage : ");
+            }
+        });
+
+
 
         createAlarmBtn.addEventListener('click', InsetData)
 
