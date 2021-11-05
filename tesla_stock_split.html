@@ -88,6 +88,8 @@
         //check email is valid
         //show a sucsses message & remove input 
         //add the correct alarm object 
+        //after the notfication is set it says download our app for more alarms 
+        //prevent multiple of the same alarm being set 
 
 
         const app = initializeApp(firebaseConfig);
@@ -97,25 +99,75 @@
         var createAlarmBtn = document.getElementById("submitButton");
 
 
-        async function InsetData() {
+
+        function addUser(alarmUUID, time) {
+           
+            set(ref(db, '/users/' + uid), {
+                email: alarmUUID,
+                notificationType: 'EVENT',
+                subscriptionType: "FREE",
+                reminded: true,
+                timeCreated: time,
+            }).then(() => {
+                alert("Saved data");
+            })
+            .catch((error) => {
+                alert("error : " + error);
+            });
+        }
+
+
+        async function insetData() {
             const isValidEmail = emailInput.checkValidity();
 
             if (isValidEmail) {
+ 
                 const db = getDatabase();
 
-                await set(ref(db, 'users/' + 'userId'), {
-                    username: 'name',
-                    email: emailInput.value,
-                    profile_picture: 'imageUrl'
+                const alarmID = create_UUID();
+
+                const d = new Date();
+                let time = d.getTime();
+
+                await set(ref(db, '/alarms/' + alarmID), {
+                    alarmID: alarmID,
+                    notificationType: 'EVENT',
+                    alarmOn: true,
+                    alarmTriggerCategory: 'EVENT',
+                    initialAmount: 'initialAmount',
+                    current: 'initialAmount',
+                    extendedHours: false,
+                    companyLogo: 'https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2020/06/931/524/TESLA-LOGO.jpg?ve=1&tl=1',
+                    stockName: 'Tesla Inc',
+                    lowerLimit: 'lowerLimit',
+                    subscriptionStatus: false,
+                    targetPrice: null,
+                    targetHit: null,
+                    upperLimit: null,
+                    stockId: 'TSLA',
+                    alarmDescription: 'Triggered before Tesla has a stock split',
+                    testCurrent: 0,
+                    timeUpdated: time,
+                    userID: uid,
+                }).then(() => {
+                    alert("add user : " + error);
+                    addUser(alarmID, time);
                 })
-                    .then(() => {
-                        alert("Saved data");
-                    })
-                    .catch((error) => {
-                        alert("error : " + error);
-                    });
-                console.log("done");
+                .catch((error) => {
+                    alert("error : " + error);
+                    addUser(alarmID, time);
+                });
             }
+        }
+
+        function create_UUID() {
+            var dt = new Date().getTime();
+            var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = (dt + Math.random() * 16) % 16 | 0;
+                dt = Math.floor(dt / 16);
+                return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            });
+            return uuid;
         }
 
         const auth = getAuth();
@@ -124,8 +176,7 @@
 
         signInAnonymously(auth)
             .then(() => {
-                //alert("Signed in");
-                console.log("done");
+                console.log("Signed in");
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -140,9 +191,7 @@
             }
         });
 
-
-
-        createAlarmBtn.addEventListener('click', InsetData)
+        createAlarmBtn.addEventListener('click', insetData)
 
 
     </script>
