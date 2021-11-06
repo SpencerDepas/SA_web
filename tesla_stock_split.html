@@ -75,7 +75,7 @@
         import {getAnalytics} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-analytics.js";
         import {getAuth, signInAnonymously, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
 
-        import {getDatabase, ref, set, push, child, update, remove} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+        import {getDatabase, get, ref, set, push, child, update, remove} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBWoanAOoR7pizrMD5d8DwVUQefAh6isnM",
@@ -106,21 +106,35 @@
         function addUser(alarmUUID, time) {
 
             const db = getDatabase();
+            const dbRef = ref(db);
 
-            addAlarmToUser(alarmUUID);
 
-            // set(ref(db, '/users/' + uid), {
-            //     email: emailInput.value,
-            //     subscriptionType: "FREE",
-            //     alarmList: {},
-            //     reminded: true,
-            //     timeCreated: time,
-            // }).then(() => {
-            //     addAlarmToUser(alarmUUID);
-            // })
-            // .catch((error) => {
-            //     //alert("error : " + error);
-            // });
+            get(child(dbRef, `users/${uid}`)).then((snapshot) => {
+            if (snapshot.exists()) {
+                console.error("snapshot.exists()");
+                addAlarmToUser(alarmUUID);
+            } else {
+                console.error("!snapshot.exists()");
+
+                set(ref(db, '/users/' + uid), {
+                    email: emailInput.value,
+                    subscriptionType: "FREE",
+                    alarmList: {},
+                    reminded: true,
+                    timeCreated: time,
+                }).then(() => {
+                    addAlarmToUser(alarmUUID);
+                })
+                .catch((error) => {
+                    //alert("error : " + error);
+                });
+            }
+            }).catch((error) => {
+                console.error(error);
+            });
+
+            console.error("nothing");
+
         }
 
 
