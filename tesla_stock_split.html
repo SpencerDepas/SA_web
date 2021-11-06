@@ -15,6 +15,9 @@
 
     <link rel="stylesheet" href="mycss.css">
 
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+
 
     <style type="text/css">
         body {
@@ -72,7 +75,7 @@
         import {getAnalytics} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-analytics.js";
         import {getAuth, signInAnonymously, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
 
-        import {getDatabase, ref, set, child, update, remove} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+        import {getDatabase, ref, set, push, child, update, remove} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBWoanAOoR7pizrMD5d8DwVUQefAh6isnM",
@@ -85,9 +88,9 @@
             measurementId: "G-23Q6LCW38C"
         };
         //todo
-        //check email is valid
-        //show a sucsses message & remove input 
+        //show a sucsses message with download our app button & remove input 
         //add the correct alarm object 
+        //check they dont add more than one alarm
         //after the notfication is set it says download our app for more alarms 
         //prevent multiple of the same alarm being set 
 
@@ -101,18 +104,33 @@
 
 
         function addUser(alarmUUID, time) {
-           
-            set(ref(db, '/users/' + uid), {
-                email: alarmUUID,
-                notificationType: 'EVENT',
-                subscriptionType: "FREE",
-                reminded: true,
-                timeCreated: time,
-            }).then(() => {
-                alert("Saved data");
-            })
-            .catch((error) => {
-                alert("error : " + error);
+
+            const db = getDatabase();
+
+            addAlarmToUser(alarmUUID);
+
+            // set(ref(db, '/users/' + uid), {
+            //     email: emailInput.value,
+            //     subscriptionType: "FREE",
+            //     alarmList: {},
+            //     reminded: true,
+            //     timeCreated: time,
+            // }).then(() => {
+            //     addAlarmToUser(alarmUUID);
+            // })
+            // .catch((error) => {
+            //     //alert("error : " + error);
+            // });
+        }
+
+
+        function addAlarmToUser(alarmUUID) {
+
+            const db = getDatabase();
+            const postListRef = ref(db, '/users/' + uid + "/alarmList/");
+            const newPostRef = push(postListRef);
+            set(newPostRef, {
+                [newPostRef.key]: alarmUUID
             });
         }
 
@@ -121,42 +139,51 @@
             const isValidEmail = emailInput.checkValidity();
 
             if (isValidEmail) {
- 
+
                 const db = getDatabase();
 
                 const alarmID = create_UUID();
 
-                const d = new Date();
-                let time = d.getTime();
+
+
+                var currentdate = new Date();
+                var formatedtime = (currentdate.getMonth() + 1) + '/'
+                    + (currentdate.getDay()) + '/'
+                    + currentdate.getFullYear() + ', '
+                    + currentdate.getHours() + ':'
+                    + currentdate.getMinutes() + ':'
+                    + currentdate.getSeconds();
+
 
                 await set(ref(db, '/alarms/' + alarmID), {
                     alarmID: alarmID,
-                    notificationType: 'EVENT',
+                    notificationType: 'EMAIL',
                     alarmOn: true,
                     alarmTriggerCategory: 'EVENT',
-                    initialAmount: 'initialAmount',
+                    initialAmount: 0,
                     current: 'initialAmount',
                     extendedHours: false,
                     companyLogo: 'https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2020/06/931/524/TESLA-LOGO.jpg?ve=1&tl=1',
                     stockName: 'Tesla Inc',
-                    lowerLimit: 'lowerLimit',
-                    subscriptionStatus: false,
+                    lowerLimit: 0,
+                    subscriptionStatus: "FREE",
+                    subAlertType: "ONE_MONTH",
                     targetPrice: null,
                     targetHit: null,
                     upperLimit: null,
                     stockId: 'TSLA',
                     alarmDescription: 'Triggered before Tesla has a stock split',
                     testCurrent: 0,
-                    timeUpdated: time,
+                    timeUpdated: formatedtime,
                     userID: uid,
                 }).then(() => {
                     alert("add user : " + error);
-                    addUser(alarmID, time);
+                    addUser(alarmID, formatedtime);
                 })
-                .catch((error) => {
-                    alert("error : " + error);
-                    addUser(alarmID, time);
-                });
+                    .catch((error) => {
+                        // alert("error : " + error);
+                        addUser(alarmID, formatedtime);
+                    });
             }
         }
 
