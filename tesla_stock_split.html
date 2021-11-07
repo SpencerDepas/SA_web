@@ -155,9 +155,9 @@
                     }).then(() => {
                         showSucssesMessage();
                     })
-                        .catch((error) => {
+                    .catch((error) => {
 
-                        });
+                    });
                 }
             }).catch((error) => {
                 console.error(error);
@@ -248,10 +248,10 @@
                 alert("add user : " + error);
                 addUser(alarmID, Date.now());
             })
-                .catch((error) => {
-                    // alert("error : " + error);
-                    addUser(alarmID, Date.now());
-                });
+            .catch((error) => {
+                // alert("error : " + error);
+                addUser(alarmID, Date.now());
+            });
         }
 
         function create_UUID() {
@@ -275,13 +275,13 @@
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                alert("errorMessage : " + errorMessage);
+                //alert("errorMessage : " + errorMessage);
             });
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 uid = user.uid;
             } else {
-                alert("errorMessage : ");
+               // alert("errorMessage : ");
             }
         });
 
