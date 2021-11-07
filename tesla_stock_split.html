@@ -151,7 +151,6 @@
                         alarmList: {
                             [alarmUUID]: alarmUUID
                         },
-                        reminded: true,
                         timeCreated: time,
                     }).then(() => {
                         showSucssesMessage();
@@ -247,11 +246,11 @@
                 userID: uid,
             }).then(() => {
                 alert("add user : " + error);
-                addUser(alarmID, formatedtime);
+                addUser(alarmID, Date.now());
             })
                 .catch((error) => {
                     // alert("error : " + error);
-                    addUser(alarmID, formatedtime);
+                    addUser(alarmID, Date.now());
                 });
         }
 
