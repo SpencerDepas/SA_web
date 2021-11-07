@@ -52,20 +52,52 @@
     <div class="col-md-12 col-lg-12 col-sm-12">
 
 
-        <h3 class="bigtextwhite lato font-weight-bold">Get an email alert before Tesla has a stock split</h3>
+        <h3 id="tittle" class="bigtextwhite lato font-weight-bold">Get an email alert before Tesla has a stock split
+        </h3>
 
 
-        <img width="120" src="tesla.jpg" alt="App Store image" class="teslaImage center" />
+        <img id="icon" width="120" src="tesla.jpg" alt="App Store image" class="teslaImage center" />
 
 
-        <h3 class="teslaHeading latoNormal">Stock Notfications for Tesla investors</h3>
+        <h3 id="subText" class="teslaHeading latoNormal">Stock Notfications for Tesla investors</h3>
 
         <div class="form">
             <input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required
                 class="center-block form-control email" aria-describedby="emailHelp" placeholder="Enter email">
         </div>
 
-        <button id="submitButton" type="button" class="center-block teslaButton btn btn-primary">SUBMIT</button>
+        <button id="submitButton" type="button" class="center-block teslaButton btn btn-primary">SET ALARM</button>
+
+
+        <dialog id="favDialog" class="teslaDialog">
+
+            <h3 id="tittle" class="teslaHeadingDialog lato font-weight-bold">Alarm Set</h3>
+
+            <img id="icon" width="120" src="tesla.jpg" alt="App Store image" class="teslaImage center" />
+
+            <h3 id="tittle" class="teslaHeadingDialog lato font-weight-bold">Set more custom Tesla alerts with our free
+                app</h3>
+
+            <div class="col text-center">
+                <button class="ctatesla center-mobile" type="button"
+                    onclick='location.href="https://stockalarm.page.link/download"'>Download</button>
+            </div>
+            <div class="row text-center stores">
+                <div class="col-md-12 col-lg-6 col-sm-12 iconbutton">
+                    <a href="https://apps.apple.com/us/app/stock-alert-stock-signal/id1582553100">
+                        <img width="200" src="ios.png" alt="App Store image" />
+                    </a>
+                </div>
+                <div class="col-md-12 col-lg-6 col-sm-12 iconbutton">
+                    <a href="https://play.google.com/store/apps/details?id=com.stockalert.stockalarm">
+                        <img width="200" src="play.png" alt="Google Play image" />
+                    </a>
+                </div>
+            </div>
+
+
+
+        </dialog>
 
     </div>
 
@@ -88,19 +120,17 @@
             measurementId: "G-23Q6LCW38C"
         };
         //todo
-        //show a sucsses message with download our app button & remove input 
-        //check they dont add more than one alarm
-        //after the notfication is set it says download our app for more alarms 
         //analitics 
-
-
 
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
 
         var emailInput = document.getElementById("email");
         var createAlarmBtn = document.getElementById("submitButton");
-
+        var subText = document.getElementById("subText");
+        var tittle = document.getElementById("tittle");
+        var icon = document.getElementById("icon");
+        var favDialog = document.getElementById('favDialog');
 
 
 
@@ -111,8 +141,7 @@
 
             get(child(dbRef, `users/${uid}`)).then((snapshot) => {
                 if (snapshot.exists()) {
-                    console.error("snapshot.exists()");
-                    //addAlarmToUser(alarmUUID);
+                    showSucssesMessage();
                 } else {
                     console.error("!snapshot.exists()");
 
@@ -125,15 +154,27 @@
                         reminded: true,
                         timeCreated: time,
                     }).then(() => {
-                        //addAlarmToUser(alarmUUID);
+                        showSucssesMessage();
                     })
                         .catch((error) => {
-                            //alert("error : " + error);
+
                         });
                 }
             }).catch((error) => {
                 console.error(error);
             });
+
+        }
+
+        function showSucssesMessage() {
+
+            document.getElementById("email").style.visibility = "hidden";
+            document.getElementById("submitButton").style.visibility = "hidden";
+            document.getElementById("subText").style.visibility = "hidden";
+            document.getElementById("tittle").style.visibility = "hidden";
+            document.getElementById("icon").style.visibility = "hidden";
+
+            favDialog.showModal();
 
         }
 
@@ -158,7 +199,7 @@
                 const dbRef = ref(db);
                 get(child(dbRef, `users/${uid}`)).then((snapshot) => {
                     if (snapshot.exists()) {
-                        alert("TESLA Stock Split alarm allready created");
+                        showSucssesMessage();
                     } else {
                         createAlarm();
                     }
