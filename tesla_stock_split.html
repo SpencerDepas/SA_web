@@ -71,7 +71,7 @@
 
         <dialog id="favDialog" class="teslaDialog">
 
-            <h3 id="tittle" class="center-block teslaHeadingDialog lato font-weight-bold">Alarm set</h3>
+            <h3 id="tittle" class="center-block teslaHeadingDialog lato font-weight-bold">Stock Split alarm set</h3>
 
             <img id="icon" width="120" src="tesla.jpg" alt="App Store image" class="teslaImage center" />
 
@@ -192,7 +192,13 @@
         function insetData() {
             const isValidEmail = emailInput.checkValidity();
 
+
+            console.log("emailInput.value : " + emailInput.value);
+
             if (isValidEmail) {
+
+                console.log("isValidEmail : " + isValidEmail);
+
 
                 const db = getDatabase();
                 const dbRef = ref(db);
@@ -280,7 +286,10 @@
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 uid = user.uid;
+                console.log("uid set");
+
             } else {
+                console.log("uid not set");
                // alert("errorMessage : ");
             }
         });
