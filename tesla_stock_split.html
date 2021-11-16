@@ -105,7 +105,7 @@
 
         import {initializeApp} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
         import {getAnalytics} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-analytics.js";
-        import {getAuth, signInAnonymously, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
+        import {getAuth, signInAnonymously, onAuthStateChanged, createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
 
         import {getDatabase, get, ref, set, push, child, update, remove} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 
@@ -130,7 +130,8 @@
         var icon = document.getElementById("icon");
         var favDialog = document.getElementById('favDialog');
 
-
+        const auth = getAuth();
+        var uid = "";
 
         function addUser(alarmUUID, time) {
 
@@ -187,27 +188,44 @@
         }
 
 
-        function insetData() {
-            const isValidEmail = emailInput.checkValidity();
+        function addAlarm(uid) {
+            
+            const db = getDatabase();
+            const dbRef = ref(db);
+            get(child(dbRef, `users/${uid}`)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    showSucssesMessage();
+                } else {
+                    createAlarm();
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
+        
+        }
 
+        function createAccount(){
+
+            const isValidEmail = emailInput.checkValidity();
+            const randPassword = create_UUID().substring(0, 8);
 
             console.log("emailInput.value : " + emailInput.value);
+            console.log("password : " + randPassword);
+
 
             if (isValidEmail) {
-
-                console.log("isValidEmail : " + isValidEmail);
-
-
-                const db = getDatabase();
-                const dbRef = ref(db);
-                get(child(dbRef, `users/${uid}`)).then((snapshot) => {
-                    if (snapshot.exists()) {
-                        showSucssesMessage();
-                    } else {
+                const auth = getAuth();
+                createUserWithEmailAndPassword(auth, emailInput.value, randPassword)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        uid = user.uid;
+                        console.log("user : " + user);
                         createAlarm();
-                    }
-                }).catch((error) => {
-                    console.error(error);
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        console.log("errorMessage : " + errorMessage);
                 });
             }
         }
@@ -253,8 +271,8 @@
                 addUser(alarmID, Date.now());
             })
             .catch((error) => {
-                // alert("error : " + error);
-                addUser(alarmID, Date.now());
+                alert("error : " + error);
+                //addUser(alarmID, Date.now());
             });
         }
 
@@ -268,31 +286,28 @@
             return uuid;
         }
 
-        const auth = getAuth();
-        var uid = "";
 
+        // signInAnonymously(auth)
+        //     .then(() => {
+        //         console.log("Signed in");
+        //     })
+        //     .catch((error) => {
+        //         const errorCode = error.code;
+        //         const errorMessage = error.message;
+        //         //alert("errorMessage : " + errorMessage);
+        //     });
+        // onAuthStateChanged(auth, (user) => {
+        //     if (user) {
+        //         uid = user.uid;
+        //         console.log("uid set");
 
-        signInAnonymously(auth)
-            .then(() => {
-                console.log("Signed in");
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                //alert("errorMessage : " + errorMessage);
-            });
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                uid = user.uid;
-                console.log("uid set");
+        //     } else {
+        //         console.log("uid not set");
+        //        // alert("errorMessage : ");
+        //     }
+        // });
 
-            } else {
-                console.log("uid not set");
-               // alert("errorMessage : ");
-            }
-        });
-
-        createAlarmBtn.addEventListener('click', insetData)
+        createAlarmBtn.addEventListener('click', createAccount)
 
 
     </script>
