@@ -244,6 +244,8 @@
                 + currentdate.getMinutes() + ':'
                 + currentdate.getSeconds();
 
+            console.log("createAlarm : " );
+
 
             await set(ref(db, '/alarms/' + alarmID), {
                 alarmID: alarmID,
@@ -271,8 +273,8 @@
                 addUser(alarmID, Date.now());
             })
             .catch((error) => {
-                alert("error : " + error);
-                //addUser(alarmID, Date.now());
+                //alert("error : " + error);
+                addUser(alarmID, Date.now());
             });
         }
 
