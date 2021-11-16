@@ -238,7 +238,7 @@
 
             var currentdate = new Date();
             var formatedtime = (currentdate.getMonth() + 1) + '/'
-                + (currentdate.getDay()) + '/'
+                + (currentdate.getDate()) + '/'
                 + currentdate.getFullYear() + ', '
                 + currentdate.getHours() + ':'
                 + currentdate.getMinutes() + ':'
@@ -269,11 +269,10 @@
                 timeUpdated: formatedtime,
                 userID: uid,
             }).then(() => {
-                alert("add user : " + error);
                 addUser(alarmID, Date.now());
             })
             .catch((error) => {
-                //alert("error : " + error);
+                console.log("error : " + error );
                 addUser(alarmID, Date.now());
             });
         }
