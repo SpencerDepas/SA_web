@@ -69,7 +69,7 @@
         <button id="submitButton" type="button" class="center-block teslaButton btn btn-primary">SET ALARM</button>
 
 
-        <dialog id="favDialog" class="teslaDialog">
+        <div id="favDialog" class="teslaDialog">
 
             <h3 id="tittle" class="center-block teslaHeadingDialog lato font-weight-bold">Stock Split alarm set</h3>
 
@@ -94,10 +94,7 @@
                     </a>
                 </div>
             </div>
-
-
-
-        </dialog>
+        </div>
 
     </div>
 
@@ -154,15 +151,17 @@
                     }).then(() => {
                         showSucssesMessage();
                     })
-                    .catch((error) => {
+                        .catch((error) => {
 
-                    });
+                        });
                 }
             }).catch((error) => {
                 console.error(error);
             });
 
         }
+
+        showSucssesMessage();
 
         function showSucssesMessage() {
 
@@ -172,7 +171,7 @@
             document.getElementById("tittle").style.visibility = "hidden";
             document.getElementById("icon").style.visibility = "hidden";
 
-            favDialog.showModal();
+            favDialog.style.display = "block";
 
         }
 
@@ -189,7 +188,7 @@
 
 
         function addAlarm(uid) {
-            
+
             const db = getDatabase();
             const dbRef = ref(db);
             get(child(dbRef, `users/${uid}`)).then((snapshot) => {
@@ -201,10 +200,10 @@
             }).catch((error) => {
                 console.error(error);
             });
-        
+
         }
 
-        function createAccount(){
+        function createAccount() {
 
             const isValidEmail = emailInput.checkValidity();
             const randPassword = create_UUID().substring(0, 8);
@@ -226,7 +225,7 @@
                         const errorCode = error.code;
                         const errorMessage = error.message;
                         console.log("errorMessage : " + errorMessage);
-                });
+                    });
             }
         }
 
@@ -244,7 +243,7 @@
                 + currentdate.getMinutes() + ':'
                 + currentdate.getSeconds();
 
-            console.log("createAlarm : " );
+            console.log("createAlarm : ");
 
 
             await set(ref(db, '/alarms/' + alarmID), {
@@ -271,10 +270,10 @@
             }).then(() => {
                 addUser(alarmID, Date.now());
             })
-            .catch((error) => {
-                console.log("error : " + error );
-                addUser(alarmID, Date.now());
-            });
+                .catch((error) => {
+                    console.log("error : " + error);
+                    addUser(alarmID, Date.now());
+                });
         }
 
         function create_UUID() {
