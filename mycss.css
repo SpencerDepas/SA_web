@@ -116,7 +116,7 @@ input, select, textarea{
 }
 
 .teslaDialog{
-    display: none;
+    display: none !important;
     border-radius: 40px;
     position: absolute;
     z-index: 1; /* Sit on top */
