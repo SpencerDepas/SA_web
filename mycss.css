@@ -187,6 +187,9 @@ input, select, textarea{
     .teslanavbar {
         height:40px;
     }
+    .teslaDialog{
+        width: 80%; 
+    }
     .bigtextwhite{
         margin-right: 20px;
         margin-left: 20px;
