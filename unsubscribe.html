@@ -96,7 +96,8 @@
     <script>
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        const email = urlParams.get('id')
+        const email = urlParams.get('email')
+        const uid = urlParams.get('id')
         var formatedEmail = email.slice(0, email.length -3) + "." + email.slice(email.length -3, email.length);
 
         document.getElementById("email").innerHTML = "Email preferences for : " + formatedEmail;
@@ -108,8 +109,8 @@
     import {initializeApp} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
     import {getAnalytics} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-analytics.js";
     import {getAuth, onAuthStateChanged, createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
-
-    import {getDatabase, get, ref, set, push, child, update, remove} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+    import 'firebase/functions';
+    //import {getDatabase, get, ref, set, push, child, update, remove} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDmM2hQHdeaSAITdh8rZv9o5raE7ydqPWs",
@@ -124,24 +125,37 @@
 
     var button = document.getElementById("submitButton");
     const app = initializeApp(firebaseConfig);
-
+    const functions = firebase.functions();
 
     function updateEmailPrefrences() {
 
         const db = getDatabase();
         const dbRef = ref(db);
 
-        var uid = 'rSTu4XB0BhgSIwrf2Bma5PgQId43';
+        //var uid = 'rSTu4XB0BhgSIwrf2Bma5PgQId43';
 
 
         var emailPreference =  document.querySelector('input[name="emailPreference"]:checked').value;
 
         console.log('emailPreference : ' + emailPreference);
-        updateMarketingUser();
+        updateUser();
 
     } 
-
-    function updateMarketingUser(uid, emailPreference){
+    function updateUser(){
+        
+        const subscriptions = functions.httpsCallable('mail_subscrption');
+        subscriptions({preference: emailPreference, uid:uid}).then((result) => {
+        console.log(result.data);
+        }).catch((error) => {
+        // Getting the Error details.
+        // var code = error.code;
+        // var message = error.message;
+        // var details = error.details;
+        console.log(error);
+        });
+    
+    }
+    /*function updateMarketingUser(uid, emailPreference){
         update(ref(db, '/marketing_users/' + uid), {
                     emailPrefrences: emailInput.value,
                 }).then(() => {
@@ -163,7 +177,7 @@
                 .catch((error) => {
                     console.log('error ' +  error);
                 });
-    }
+    }*/
 
 
     button.addEventListener('click', updateEmailPrefrences)
