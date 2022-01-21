@@ -145,7 +145,7 @@
         
         const subscriptions = functions.httpsCallable('mail_subscrption');
         subscriptions({preference: emailPreference, uid:uid}).then((result) => {
-            console.log(result.data);
+            console.log(result);
         }).catch((error) => {
             // Getting the Error details.
             // var code = error.code;
