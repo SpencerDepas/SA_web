@@ -145,13 +145,13 @@
         
         const subscriptions = functions.httpsCallable('mail_subscrption');
         subscriptions({preference: emailPreference, uid:uid}).then((result) => {
-        console.log(result.data);
+            console.log(result.data);
         }).catch((error) => {
-        // Getting the Error details.
-        // var code = error.code;
-        // var message = error.message;
-        // var details = error.details;
-        console.log(error);
+            // Getting the Error details.
+            // var code = error.code;
+            // var message = error.message;
+            // var details = error.details;
+            console.log(error);
         });
     
     }
