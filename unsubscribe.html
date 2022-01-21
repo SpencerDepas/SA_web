@@ -9,7 +9,7 @@
     <link rel="icon" href="https://imgur.com/VjN344H.png">
 
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700" rel="stylesheet">
-    <script src="js/app.js" defer></script>
+ 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
@@ -61,29 +61,29 @@
 
             <h3 class="unsubscribetext lato font-weight-bold">Email prefrences</h3>
 
-            <h3 class="unsubscribe lato font-weight-bold">Select your email preferences</h3>
+            <h3 id="email" class="unsubscribe lato font-weight-bold"></h3>
 
             <div>
-                <input type="radio" id="huey" name="drone" value="huey" checked>
-                <label for="huey">Stay subscribed</label>
+                <input type="radio" id="huey" name="emailPreference" value="ALL" checked>
+                <label for="ALL">Stay subscribed</label>
             </div>
             <div>
-                <input type="radio" id="huey" name="drone" value="huey">
-                <label for="huey">Get our monthly investor email insight email</label>
+                <input type="radio" id="huey" name="emailPreference" value="EMAIL_A">
+                <label for="EMAIL_A">Get our monthly investor email insight email</label>
             </div>
               
             <div>
-                <input type="radio" id="dewey" name="drone" value="dewey">
-                <label for="dewey">Get your monthly alarm status email</label>
+                <input type="radio" id="dewey" name="emailPreference" value="EMAIL_B">
+                <label for="EMAIL_B">Get your monthly alarm status email</label>
             </div>
             <div>
-                <input type="radio" id="louie" name="drone" value="louie">
-                <label for="louie">Unsubscribe</label>
+                <input type="radio" id="louie" name="emailPreference" value="UNSUBSCRIBE">
+                <label for="UNSUBSCRIBE">Unsubscribe</label>
             </div>
 
 
             <div class="col text-center">
-                <button class="ctaUnsubscribe center-mobile" type="button" onclick='location.href="https://stockalarm.page.link/download"'>Update prefrences</button>
+                <button id="submitButton" class="ctaUnsubscribe center-mobile" type="button">Update prefrences</button>
             </div>
 
                   
@@ -92,6 +92,85 @@
         
 
     </div>
+
+    <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const email = urlParams.get('id')
+        var formatedEmail = email.slice(0, email.length -3) + "." + email.slice(email.length -3, email.length);
+
+        document.getElementById("email").innerHTML = "Email preferences for : " + formatedEmail;
+      
+    </script>
+
+<script type="module">
+
+    import {initializeApp} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
+    import {getAnalytics} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-analytics.js";
+    import {getAuth, onAuthStateChanged, createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
+
+    import {getDatabase, get, ref, set, push, child, update, remove} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDmM2hQHdeaSAITdh8rZv9o5raE7ydqPWs",
+        authDomain: "stock-alarm-f9527.firebaseapp.com",
+        databaseURL: "https://stock-alarm-f9527-default-rtdb.firebaseio.com",
+        projectId: "stock-alarm-f9527",
+        storageBucket: "stock-alarm-f9527.appspot.com",
+        messagingSenderId: "4729421077",
+        appId: "1:4729421077:web:0cd023c6ed2ee275b57d1c",
+        measurementId: "G-7VQLGGFLJ3"
+    };
+
+    var button = document.getElementById("submitButton");
+    const app = initializeApp(firebaseConfig);
+
+
+    function updateEmailPrefrences() {
+
+        const db = getDatabase();
+        const dbRef = ref(db);
+
+        var uid = 'rSTu4XB0BhgSIwrf2Bma5PgQId43';
+
+
+        var emailPreference =  document.querySelector('input[name="emailPreference"]:checked').value;
+
+        console.log('emailPreference : ' + emailPreference);
+        updateMarketingUser();
+
+    } 
+
+    function updateMarketingUser(uid, emailPreference){
+        update(ref(db, '/marketing_users/' + uid), {
+                    emailPrefrences: emailInput.value,
+                }).then(() => {
+                    showSucssesMessage();
+                    console.log('SucssesMessage ');
+                })
+                .catch((error) => {
+                    console.log('error ' +  error);
+                });
+    }
+
+    function updateUser(uid, emailPreference){
+        update(ref(db, '/marketing_users/' + uid), {
+                    emailPrefrences: emailInput.value,
+                }).then(() => {
+                    showSucssesMessage();
+                    console.log('SucssesMessage ');
+                })
+                .catch((error) => {
+                    console.log('error ' +  error);
+                });
+    }
+
+
+    button.addEventListener('click', updateEmailPrefrences)
+     
+</script>
+
+
  
 </body>
 
