@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
     <link rel="stylesheet" href="mycss.css">
-
-
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-functions.js"></script>
     <style type="text/css">
             body { 
                 margin: 20px;
@@ -106,10 +106,10 @@
 
 <script type="module">
 
-    import {initializeApp} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
+    //import {initializeApp} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
     import {getAnalytics} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-analytics.js";
     //import {getAuth, onAuthStateChanged, createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
-    import 'firebase/functions';
+    //import "https://www.gstatic.com/firebasejs/9.2.0/firebase-functions.js";
     //import {getDatabase, get, ref, set, push, child, update, remove} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 
     const firebaseConfig = {
@@ -124,13 +124,13 @@
     };
 
     var button = document.getElementById("submitButton");
-    const app = initializeApp(firebaseConfig);
-    const functions = firebase.functions();
+    const app = firebase.initializeApp(firebaseConfig);
+    //const fn = functions();
 
     function updateEmailPrefrences() {
 
-        const db = getDatabase();
-        const dbRef = ref(db);
+        //const db = getDatabase();
+        //const dbRef = ref(db);
 
         //var uid = 'rSTu4XB0BhgSIwrf2Bma5PgQId43';
 
@@ -138,13 +138,13 @@
         var emailPreference =  document.querySelector('input[name="emailPreference"]:checked').value;
 
         console.log('emailPreference : ' + emailPreference);
-        updateUser();
+        updateUser(emailPreference);
 
     } 
-    function updateUser(){
+    function updateUser(emailp){
         
-        const subscriptions = functions.httpsCallable('mail_subscrption');
-        subscriptions({preference: emailPreference, uid:uid}).then((result) => {
+        const subscriptions = firebase.functions().httpsCallable('mail_subscrption');
+        subscriptions({preference: emailp, uid:uid}).then((result) => {
             console.log(result);
         }).catch((error) => {
             // Getting the Error details.
