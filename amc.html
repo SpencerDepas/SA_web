@@ -37,7 +37,7 @@
     <style type="text/css">
         body {
             margin: 20px;
-            background-color: black;
+            background-color: white;
         }
 
         u {
@@ -56,7 +56,7 @@
 
     <nav class="navbar">
 
-        <a href="index.html"><img src="heading___logo_tesla.png" class="teslanavbar" /></a>
+        <a href="index.html"><img src="sn_amc.png" class="teslanavbar" /></a>
 
     </nav>
 
@@ -67,36 +67,36 @@
     <div class="col-md-12 col-lg-12 col-sm-12">
 
 
-        <h3 id="tittle" class="bigtextwhite lato font-weight-bold">Get an email alert before Tesla has a stock split
+        <h3 style="color: black ! important;" id="tittle" class="bigtextwhite lato font-weight-bold">Get an email alert before AMC has a stock split
         </h3>
 
 
-        <img id="icon" width="120" src="tesla.jpg" alt="App Store image" class="teslaImage center" />
+        <img id="icon" width="160" src="amc.png" alt="App Store image" class="teslaImage center" />
 
 
-        <h3 id="subText" class="teslaHeading latoNormal">Stock Split Notfication for Tesla</h3>
+        <h3 style="color: black ! important;" id="subText" class="teslaHeading latoNormal">Stock Split Notfication for AMC</h3>
 
         <div class="form">
-            <input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required
+            <input  style="background-color: #FFFFFF; border-color: #000000 !important;" type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required
                 class="center-block form-control email" aria-describedby="emailHelp" placeholder="Enter email">
         </div>
 
-        <button id="submitButton" type="button" class="center-block teslaButton btn btn-primary">SET ALARM</button>
+        <button style="background-color: #e51937; border-color: #e51937 !important;" id="submitButton" type="button" class="center-block teslaButton btn btn-primary">SET ALARM</button>
 
 
         <div id="favDialog" class="teslaDialog">
 
             <h3 id="tittle" class="center-block teslaHeadingDialog lato font-weight-bold">Stock Split alarm set</h3>
 
-            <img id="icon" width="120" src="tesla.jpg" alt="App Store image" class="teslaImage center" />
+            <img id="icon" width="160" src="amc.png" alt="App Store image" class="teslaImage center" />
 
-            <h3 id="tittle" class="teslaHeadingDialog lato font-weight-bold">Set more custom Tesla alerts with our free
+            <h3 id="tittle" class="teslaHeadingDialog lato font-weight-bold">Set more custom AMC alerts with our free
                 app</h3>
 
             <div class="col text-center">
-                <button class="ctatesla center-mobile" type="button"
+                <button style="background-color: #e51937 !important;" class="ctatesla center-mobile" type="button"
                     onclick='location.href="https://stockalarm.page.link/download"'>Download</button>
-            </div>
+            </div> 
             <div class="row text-center stores">
                 <div class="col-md-12 col-lg-6 col-sm-12 iconbutton">
                     <a href="https://apps.apple.com/us/app/stock-alert-stock-signal/id1582553100">
@@ -222,28 +222,30 @@
 
         function createAccount() {
 
-            const isValidEmail = emailInput.checkValidity();
-            const randPassword = create_UUID().substring(0, 8);
+            showSucssesMessage();
 
-            console.log("emailInput.value : " + emailInput.value);
-            console.log("password : " + randPassword);
+            // const isValidEmail = emailInput.checkValidity();
+            // const randPassword = create_UUID().substring(0, 8);
+
+            // console.log("emailInput.value : " + emailInput.value);
+            // console.log("password : " + randPassword);
 
 
-            if (isValidEmail) {
-                const auth = getAuth();
-                createUserWithEmailAndPassword(auth, emailInput.value, randPassword)
-                    .then((userCredential) => {
-                        const user = userCredential.user;
-                        uid = user.uid;
-                        console.log("user : " + user);
-                        createAlarm();
-                    })
-                    .catch((error) => {
-                        const errorCode = error.code;
-                        const errorMessage = error.message;
-                        console.log("errorMessage : " + errorMessage);
-                    });
-            }
+            // if (isValidEmail) {
+            //     const auth = getAuth();
+            //     createUserWithEmailAndPassword(auth, emailInput.value, randPassword)
+            //         .then((userCredential) => {
+            //             const user = userCredential.user;
+            //             uid = user.uid;
+            //             console.log("user : " + user);
+            //             createAlarm();
+            //         })
+            //         .catch((error) => {
+            //             const errorCode = error.code;
+            //             const errorMessage = error.message;
+            //             console.log("errorMessage : " + errorMessage);
+            //         });
+            // }
         }
 
         async function createAlarm() {
