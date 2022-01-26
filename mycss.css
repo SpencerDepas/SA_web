@@ -93,6 +93,7 @@
 }
 .mynavbar {
     height:40px;
+      margin-left: 10px;
 }
 .teslaHeadingDialog {
     text-align: center;
@@ -234,6 +235,7 @@ input, select, textarea{
     }
     .mynavbar {
         height:20px;
+
     }
     .cta{
     
@@ -352,6 +354,7 @@ input, select, textarea{
     padding-top: 11px;
     padding-bottom:  11px;
     background-color: #dd48a3;
+ 
 }
 .cta:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
     color: #fff;
