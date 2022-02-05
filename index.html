@@ -15,6 +15,19 @@
 
     <link rel="stylesheet" href="mycss.css">
 
+    <meta property="og:image" content="https://i.imgur.com/kBxfIpX.png" />
+    <meta property="og:title" content="Stock notifications that help investors make more money" />
+    <meta property="og:description" content="Get custom stock alerts by text, email, phone and push notfication." />
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@spencerdepas">
+    <meta name="twitter:title" content="Stock notifications that help investors make more money">
+    <meta name="twitter:description" content="Get custom stock alerts by text, email, phone and push notfication.">
+    <meta name="twitter:image" content="https://i.imgur.com/kBxfIpX.png">
+
+
+
 
     <style type="text/css">
             body { 
@@ -33,14 +46,38 @@
  
 <body>
 
-    <script>
+    <script type="module">
         const queryString = window.location.search;
         console.log(queryString);
+
+        import { initializeApp } from "firebase/app";
+        import { getAnalytics } from "firebase/analytics";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyDmM2hQHdeaSAITdh8rZv9o5raE7ydqPWs",
+            authDomain: "stock-alarm-f9527.firebaseapp.com",
+            databaseURL: "https://stock-alarm-f9527-default-rtdb.firebaseio.com",
+            projectId: "stock-alarm-f9527",
+            storageBucket: "stock-alarm-f9527.appspot.com",
+            messagingSenderId: "4729421077",
+            appId: "1:4729421077:web:0cd023c6ed2ee275b57d1c",
+            measurementId: "G-7VQLGGFLJ3"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+
     </script>
 
     <nav class="navbar">
 
-        <img src="heading_logo.png" class="mynavbar" />
+        <img src="heading___logo_blue.png" class="mynavbar" />
 
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -60,7 +97,7 @@
 
         <div class="col-md-12 col-lg-6 col-sm-12">
 
-            <h3 class="mytittle lato font-weight-bold">Own stocks or cryptocurrencies?</h3>
+            <h3 class="mytittle lato">Own stocks or cryptocurrencies?</h3>
 
                       
             <h3 class="bigtext lato font-weight-bold">Smart notifications that help investors make more money</h3>
