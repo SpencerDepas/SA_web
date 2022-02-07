@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="icon" href="https://imgur.com/VjN344H.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700" rel="stylesheet">
+    <script src="js/app.js" defer></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="mycss.css">
+<!-- 
+    <meta property="og:image" content="https://i.imgur.com/kBxfIpX.png" />
+    <meta property="og:title" content="Stock notifications that help investors make more money" />
+    <meta property="og:description" content="Get custom stock alerts by text, email, phone and push notfication." />
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@spencerdepas">
+    <meta name="twitter:title" content="Stock notifications that help investors make more money">
+    <meta name="twitter:description" content="Get custom stock alerts by text, email, phone and push notfication.">
+    <meta name="twitter:image" content="https://i.imgur.com/kBxfIpX.png"> -->
+
+
+
+
+    <style type="text/css">
+            body { 
+                margin: 20px;
+                background-color: white;
+            } 
+            u {
+                text-decoration-color: red;
+            }
+            .stores {
+                margin-top: 40px;
+            }
+    </style>
+</head>
+
+ 
+<body>
+
+    <script type="module">
+        const queryString = window.location.search;
+        console.log(queryString);
+
+        import { initializeApp } from "firebase/app";
+        import { getAnalytics } from "firebase/analytics";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyDmM2hQHdeaSAITdh8rZv9o5raE7ydqPWs",
+            authDomain: "stock-alarm-f9527.firebaseapp.com",
+            databaseURL: "https://stock-alarm-f9527-default-rtdb.firebaseio.com",
+            projectId: "stock-alarm-f9527",
+            storageBucket: "stock-alarm-f9527.appspot.com",
+            messagingSenderId: "4729421077",
+            appId: "1:4729421077:web:0cd023c6ed2ee275b57d1c",
+            measurementId: "G-7VQLGGFLJ3"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+
+    </script>
+
+    <nav class="navbar">
+
+        <img src="heading___logo_blue.png" class="mynavbar" />
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link faq lato font-weight-bold text-my-own-color" href="faq.html">FAQ</a>
+            </li>
+        </ul>
+
+
+    </nav>
+
+        
+    <hr class="headerline"/>
+
+
+    <div class="row">
+
+
+        <div class="col-md-12 col-lg-6 col-sm-12">
+
+            <h3 class="bigtext lato font-weight-bold">Add alarm on your phone and we will add the alarm to your list</h3>
+
+            <div class="col text-center">
+                <button class="cta center-mobile" type="button" onclick='location.href="https://stockalarm.page.link/download"'>Download</button>
+            </div>
+            <div class="row text-center stores">
+                <div class="col-md-12 col-lg-6 col-sm-12 iconbutton" >
+                    <a href="https://apps.apple.com/us/app/stock-alert-stock-signal/id1582553100">
+                         <img width="200" src="ios.png" alt="App Store image"  />
+                    </a>
+                </div>
+                <div class="col-md-12 col-lg-6 col-sm-12 iconbutton">
+                    <a href="https://play.google.com/store/apps/details?id=com.stockalert.stockalarm">
+                         <img width="200" src="play.png" alt="Google Play image" />
+                    </a>
+                </div>
+            </div>
+                  
+        </div>
+
+        <div class="col-md-12 col-lg-6 col-sm-12">
+
+            <img class="center image" src="main_screen.png" />
+
+        </div>
+
+    </div>
+ 
+</body>
+
+
+
+</html>
