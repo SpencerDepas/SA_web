@@ -94,8 +94,8 @@
                 app</h3>
 
             <div class="col text-center">
-                <button class="ctatesla center-mobile" type="button"
-                    onclick='location.href="https://stockalarm.page.link/download"'>Download</button>
+                <button class="ctatesla center-mobile" type="button" id="makeDeeplinkBtn" >Download</button>
+
             </div>
             <div class="row text-center stores">
                 <div class="col-md-12 col-lg-6 col-sm-12 iconbutton">
@@ -137,13 +137,16 @@
 
         var emailInput = document.getElementById("email");
         var createAlarmBtn = document.getElementById("submitButton");
+        var downloadBtn = document.getElementById("makeDeeplinkBtn");
         var subText = document.getElementById("subText");
         var tittle = document.getElementById("tittle");
         var icon = document.getElementById("icon");
         var favDialog = document.getElementById('favDialog');
 
         const auth = getAuth();
-        var uid = "";
+        var uid = "test";
+
+       //showSucssesMessage()
 
         function addUser(alarmUUID, time) {
 
@@ -168,9 +171,9 @@
                     }).then(() => {
                         showSucssesMessage();
                     })
-                        .catch((error) => {
+                    .catch((error) => {
 
-                        });
+                    });
                 }
             }).catch((error) => {
                 console.error(error);
@@ -218,6 +221,14 @@
                 console.error(error);
             });
 
+        }
+
+
+        function makeDeeplink() {
+            var muidDeepLink = "https://stockalarm.page.link/?apn=com.stockalert.stockalarm&ibi=com.stock.alarm.StockAlert&isi=1582553100&link=https%3A%2F%2Fgetsmartnotifications.com%2Faddalarm%3FdeepLinkID%3DONE_PAGE_TESLA_STOCK_SPLIT%26deepLinkType%3Dmuid$%26marketingUID%3D"
+            console.log("makeDeeplink : " + uid);
+            console.log("URL : " + muidDeepLink + uid );
+            window.location.href = muidDeepLink + uid
         }
 
         function createAccount() {
@@ -304,6 +315,8 @@
         }
 
         createAlarmBtn.addEventListener('click', createAccount)
+        downloadBtn.addEventListener('click', makeDeeplink)
+
 
 
     </script>
