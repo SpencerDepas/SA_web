@@ -146,6 +146,9 @@
         const auth = getAuth();
         var uid = "";
 
+        logEvent(analytics, 'One page loaded');
+        logEvent(analytics, 'Tesla Stock Split page loaded');
+
         function addUser(alarmUUID, time) {
 
             const db = getDatabase();
@@ -190,6 +193,9 @@
             document.getElementById("icon").style.visibility = "hidden";
 
             favDialog.style.display = "inline";
+
+            logEvent(analytics, 'One page email collected');
+            logEvent(analytics, 'Tesla Stock Split email collected');
 
         }
 
