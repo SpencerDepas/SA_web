@@ -145,8 +145,9 @@
         var icon = document.getElementById("icon");
         var favDialog = document.getElementById('favDialog');
 
-        logEvent(analytics, 'chipotle_stock_split page loaded');
+       // firebase.analytics().logEvent('chipotle_stock_split page loaded');
 
+        logEvent(analytics, 'chipotle_stock_split page loaded');
 
         const auth = getAuth();
         var uid = "";
