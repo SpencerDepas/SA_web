@@ -145,9 +145,8 @@
         var icon = document.getElementById("icon");
         var favDialog = document.getElementById('favDialog');
 
-       // firebase.analytics().logEvent('chipotle_stock_split page loaded');
-
-        logEvent(analytics, 'chipotle_stock_split page loaded');
+        logEvent(analytics, 'One page loaded');
+        logEvent(analytics, 'Chipotle Stock Split page loaded');
 
         const auth = getAuth();
         var uid = "";
@@ -196,7 +195,8 @@
             document.getElementById("icon").style.visibility = "hidden";
 
             favDialog.style.display = "inline";
-
+            logEvent(analytics, 'One page email collected');
+            logEvent(analytics, 'Chipotle Stock Split email collected');
         }
 
 
