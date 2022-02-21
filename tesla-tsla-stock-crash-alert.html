@@ -164,7 +164,7 @@
         logEvent(analytics, 'Tesla 7 percent drop loaded');
 
 
-        fetch('https://cloud.iexapis.com/stable/stock/TSLA/quote?token=pk_f4e72a4d9cfc4ced8084ea64725c3f52')
+        fetch('https://cloud.iexapis.com/stable/stock/TSLA/quote?token=pk_f4e72a4d9cfc4ced8084ea64725c3f52&filter=latestPrice')
             .then(response => response.json())
             .then(data => updateCurrentPrice(data));
 
