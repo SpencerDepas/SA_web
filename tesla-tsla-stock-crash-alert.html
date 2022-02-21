@@ -11,16 +11,16 @@
     <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:fb="http://ogp.me/ns/fb#">
 
-    <meta property="og:image" content="https://i.imgur.com/QlO51Ge.png" />
-    <meta property="og:title" content="Stock Split Notfication for Tesla" />
-    <meta property="og:description" content="Get an email alert before Tesla has a stock split" />
+    <meta property="og:image" content="https://i.imgur.com/X7cXyUt.png" />
+    <meta property="og:title" content="TSLA Percent drop notfication for Tesla" />
+    <meta property="og:description" content="Get an email alert when Tesla has a perecnt price drop" />
     
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@spencerdepas">
-    <meta name="twitter:title" content="Stock Split Notfication for Tesla">
-    <meta name="twitter:description" content="Get an email alert before Tesla has a stock split">
-    <meta name="twitter:image" content="https://i.imgur.com/QlO51Ge.png">
+    <meta name="twitter:title" content="TSLA Percent drop notfication for Tesla">
+    <meta name="twitter:description" content="Get an email alert when Tesla has a perecnt price drop">
+    <meta name="twitter:image" content="https://i.imgur.com/X7cXyUt.png">
 
 
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700" rel="stylesheet">
@@ -34,12 +34,12 @@
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 
     <!-- 
-        update analitics
-        update copy
-        update alarm 
-            alarmID
+        update analitics  done
+        update copy  done
+        update alarm done
+            alarmID done
         update meta data 
-        update deeplink 
+        update deeplink done
     
     -->
 
@@ -77,14 +77,16 @@
     <div class="col-md-12 col-lg-12 col-sm-12">
 
 
-        <h3 id="tittle" class="bigtextwhite lato font-weight-bold">Get an email alert before Tesla has a stock split
+        <h3 id="tittle" class="bigtextwhite lato font-weight-bold">Get an email alert with a 7% price drop for Tesla
         </h3>
+
+        <h3 id="current_price" class="teslaHeading latoNormal">  </h3>
 
 
         <img id="icon" width="120" src="tesla.jpg" alt="App Store image" class="teslaImage center" />
 
 
-        <h3 id="subText" class="teslaHeading latoNormal">Stock Split Notfication for Tesla</h3>
+        <h3 id="subText" class="teslaHeading latoNormal">Price drop notfication for TSLA</h3>
 
         <div class="form">
             <input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required
@@ -96,7 +98,7 @@
 
         <div id="favDialog" class="teslaDialog">
 
-            <h3 id="tittle" class="center-block teslaHeadingDialog lato font-weight-bold">Stock Split alarm set</h3>
+            <h3 id="tittle" class="center-block teslaHeadingDialog lato font-weight-bold">7% price drop alarm set</h3>
 
             <img id="icon" width="120" src="tesla.jpg" alt="App Store image" class="teslaImage center" />
 
@@ -152,12 +154,27 @@
         var tittle = document.getElementById("tittle");
         var icon = document.getElementById("icon");
         var favDialog = document.getElementById('favDialog');
+        var currentPrice;
+
 
         const auth = getAuth();
         var uid = "";
 
-        logEvent(analytics, 'One page loaded');
-        logEvent(analytics, 'Tesla 7 percent drop loaded');
+        // logEvent(analytics, 'One page loaded');
+        // logEvent(analytics, 'Tesla 7 percent drop loaded');
+
+
+        fetch('https://cloud.iexapis.com/stable/stock/TSLA/quote?token=pk_f4e72a4d9cfc4ced8084ea64725c3f52')
+            .then(response => response.json())
+            .then(data => updateCurrentPrice(data));
+
+
+        function updateCurrentPrice(data){
+            console.log("data.latestPrice :"  + data.latestPrice);
+            document.getElementById("current_price").textContent= ("Current price $" + data.latestPrice);
+            currentPrice = data.latestPrice;
+             
+        }
 
         function addUser(alarmUUID, time) {
 
@@ -239,7 +256,7 @@
 
 
         function makeDeeplink() {
-            var muidDeepLink = "https://stockalarm.page.link/?apn=com.stockalert.stockalarm&ibi=com.stock.alarm.StockAlert&isi=1582553100&link=https%3A%2F%2Fgetsmartnotifications.com%2Faddalarm%3FdeepLinkID%3DONE_PAGE_TESLA_STOCK_SPLIT%26deepLinkType%3Dmuid$%26marketingUID%3D"
+            var muidDeepLink = "https://stockalarm.page.link/?apn=com.stockalert.stockalarm&ibi=com.stock.alarm.StockAlert&isi=1582553100&link=https%3A%2F%2Fgetsmartnotifications.com%2Faddalarm%3FdeepLinkID%3DONE_PAGE_TESLA_PERCENT_DROP%26deepLinkType%3Dmuid$%26marketingUID%3D"
             console.log("makeDeeplink : " + uid);
             console.log("URL : " + muidDeepLink + uid );
             window.location.href = muidDeepLink + uid
@@ -275,7 +292,7 @@
 
             const db = getDatabase();
 
-            const alarmID = "TESLA_STOCK_SPLIT_" + create_UUID();
+            const alarmID = "TESLA_PERCENT_DROP" + create_UUID();
 
             var currentdate = new Date();
             var formatedtime = (currentdate.getMonth() + 1) + '/'
@@ -292,30 +309,30 @@
                 alarmID: alarmID,
                 notificationType: 'EMAIL',
                 alarmOn: true,
-                alarmTriggerCategory: 'STOCK_SPLITS',
+                alarmTriggerCategory: 'PERCENT_CHANGE',
                 initialAmount: 0,
-                current: 0,
+                current: currentPrice,
                 extendedHours: false,
                 companyLogo: 'https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2020/06/931/524/TESLA-LOGO.jpg?ve=1&tl=1',
                 stockName: 'Tesla Inc',
-                lowerLimit: 0,
+                lowerLimit: -7,
                 subscriptionStatus: "FREE",
-                subAlertType: "ONE_MONTH",
+                subAlertType: "PERCENT_CHANGE_FROM_CURRENT",
                 targetPrice: 0,
                 targetHit: null,
                 upperLimit: 0,
                 stockId: 'TSLA',
-                alarmDescription: 'Triggered before Tesla has a stock split',
+                alarmDescription: 'Triggered with a 7% price drop',
                 testCurrent: 0,
                 timeUpdated: formatedtime,
                 userID: uid,
             }).then(() => {
                 addUser(alarmID, Date.now());
             })
-                .catch((error) => {
-                    console.log("error : " + error);
-                    addUser(alarmID, Date.now());
-                });
+            .catch((error) => {
+                console.log("error : " + error);
+                addUser(alarmID, Date.now());
+            });
         }
 
         function create_UUID() {
