@@ -160,8 +160,8 @@
         const auth = getAuth();
         var uid = "";
 
-        // logEvent(analytics, 'One page loaded');
-        // logEvent(analytics, 'Tesla 7 percent drop loaded');
+        logEvent(analytics, 'One page loaded');
+        logEvent(analytics, 'Tesla 7 percent drop loaded');
 
 
         fetch('https://cloud.iexapis.com/stable/stock/TSLA/quote?token=pk_f4e72a4d9cfc4ced8084ea64725c3f52')
