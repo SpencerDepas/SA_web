@@ -34,7 +34,7 @@
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 
     <!-- 
-        update analitics   
+        update analitics done 
         update copy   
         update alarm  
             alarmID  
@@ -85,7 +85,7 @@
         <img id="icon" width="120" src="tesla.jpg" alt="App Store image" class="teslaImage center" />
 
 
-        <h3 id="subText" class="teslaHeading latoNormal">Price drop notfication for TSLA</h3>
+        <h3 id="subText" class="teslaHeading latoNormal">Target price notification for TSLA</h3>
 
         <div class="form">
             <input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required
@@ -97,7 +97,7 @@
 
         <div id="favDialog" class="teslaDialog">
 
-            <h3 id="tittle" class="center-block teslaHeadingDialog lato font-weight-bold">7% price drop alarm set</h3>
+            <h3 id="tittle" class="center-block teslaHeadingDialog lato font-weight-bold">Target price alarm set</h3>
 
             <img id="icon" width="120" src="tesla.jpg" alt="App Store image" class="teslaImage center" />
 
@@ -153,20 +153,41 @@
         var tittle = document.getElementById("tittle");
         var icon = document.getElementById("icon");
         var favDialog = document.getElementById('favDialog');
+        var targetPrice = 1500;
+        var referer = "";
         var currentPrice;
 
 
         const auth = getAuth();
         var uid = "";
 
-        logEvent(analytics, 'One page loaded');
-        logEvent(analytics, 'Tesla Target Price');
+        getQueryParams();
+
+        logEvent(analytics, 'One page loaded', {
+          referer: referer
+        });
+        logEvent(analytics, 'Tesla Target Price', {
+          referer: referer
+        });
 
 
         fetch('https://cloud.iexapis.com/stable/stock/TSLA/quote?token=pk_f4e72a4d9cfc4ced8084ea64725c3f52')
             .then(response => response.json())
             .then(data => updateCurrentPrice(data));
 
+
+        function getQueryParams(){
+            const params = new Proxy(new URLSearchParams(window.location.search), {
+                get: (searchParams, prop) => searchParams.get(prop),
+            });
+           
+            targetPrice = params.targetPrice;
+            referer = params.referer;
+
+            console.log("targetPrice " +  targetPrice);
+            console.log("referer " +  referer);
+
+        }
 
         function updateCurrentPrice(data){
             console.log("data.latestPrice :"  + data.latestPrice);
@@ -220,8 +241,12 @@
 
             favDialog.style.display = "inline";
 
-            logEvent(analytics, 'One page email collected');
-            logEvent(analytics, 'Tesla Target Price email collected');
+            logEvent(analytics, 'One page email collected', {
+              referer: referer
+            });
+            logEvent(analytics, 'Tesla Target Price email collected', {
+              referer: referer
+            });
 
         }
 
