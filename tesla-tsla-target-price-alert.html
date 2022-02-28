@@ -35,7 +35,7 @@
 
     <!-- 
         update analitics done 
-        update copy   
+        update copy done
         update alarm  
             alarmID  
         update meta   
@@ -76,7 +76,7 @@
     <div class="col-md-12 col-lg-12 col-sm-12">
 
 
-        <h3 id="tittle" class="bigtextwhite lato font-weight-bold">Get an email alert with a 7% price drop for Tesla
+        <h3 id="tittle" class="bigtextwhite lato font-weight-bold">Get an email alert when Tesla hits 
         </h3>
 
         <h3 id="current_price" class="teslaHeading latoNormal">  </h3>
@@ -190,8 +190,8 @@
         }
 
         function updateCurrentPrice(data){
-            console.log("data.latestPrice :"  + data.latestPrice);
             document.getElementById("current_price").textContent= ("Current price $" + data.latestPrice);
+            document.getElementById("tittle").textContent= ("Get an email alert when Tesla hits $" + targetPrice + "");
             currentPrice = data.latestPrice;
              
         }
