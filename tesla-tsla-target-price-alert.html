@@ -328,7 +328,9 @@
 
             console.log("createAlarm : ");
 
+            var targetHit = (targetPrice > currentPrice) ? false : true;
 
+        
             await set(ref(db, '/alarms/' + alarmID), {
                 alarmID: alarmID,
                 notificationType: 'EMAIL',
@@ -343,7 +345,7 @@
                 subscriptionStatus: "FREE",
                 subAlertType: "",
                 targetPrice: targetPrice,
-                targetHit: null,
+                targetHit: targetHit,
                 upperLimit: 0,
                 stockId: 'TSLA',
                 alarmDescription: "When Target price meets $" + targetPrice,
