@@ -316,7 +316,7 @@
 
             const db = getDatabase();
 
-            const alarmID = "TESLA_PERCENT_DROP_" + create_UUID();
+            const alarmID = "TESLA_TARGET_PRICE" + create_UUID();
 
             var currentdate = new Date();
             var formatedtime = (currentdate.getMonth() + 1) + '/'
@@ -333,20 +333,20 @@
                 alarmID: alarmID,
                 notificationType: 'EMAIL',
                 alarmOn: true,
-                alarmTriggerCategory: 'PERCENT_CHANGE',
+                alarmTriggerCategory: 'TARGET_PRICE',
                 initialAmount: currentPrice,
                 current: currentPrice,
                 extendedHours: false,
                 companyLogo: 'https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2020/06/931/524/TESLA-LOGO.jpg?ve=1&tl=1',
                 stockName: 'Tesla Inc',
-                lowerLimit: -7,
+                lowerLimit: 0,
                 subscriptionStatus: "FREE",
-                subAlertType: "PERCENT_CHANGE_FROM_CURRENT",
-                targetPrice: 0,
+                subAlertType: "",
+                targetPrice: targetPrice,
                 targetHit: null,
                 upperLimit: 0,
                 stockId: 'TSLA',
-                alarmDescription: 'Triggered with a 7% price drop',
+                alarmDescription: "When Target price meets $" + targetPrice,
                 testCurrent: 0,
                 timeUpdated: formatedtime,
                 userID: uid,
