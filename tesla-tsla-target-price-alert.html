@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="icon" href="https://imgur.com/VjN344H.png">
+
+    <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:fb="http://ogp.me/ns/fb#">
+
+    <meta property="og:image" content="https://i.imgur.com/X7cXyUt.png" />
+    <meta property="og:title" content="TSLA Percent drop notfication for Tesla" />
+    <meta property="og:description" content="Get an email alert when Tesla has a perecnt price drop" />
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@spencerdepas">
+    <meta name="twitter:title" content="TSLA Percent drop notfication for Tesla">
+    <meta name="twitter:description" content="Get an email alert when Tesla has a perecnt price drop">
+    <meta name="twitter:image" content="https://i.imgur.com/X7cXyUt.png">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="mycss.css">
+
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+
+    <!-- 
+        update analitics   
+        update copy   
+        update alarm  
+            alarmID  
+        update meta   
+        update deeplink  
+    -->
+
+
+    <style type="text/css">
+        body {
+            margin: 20px;
+            background-color: black;
+        }
+
+        u {
+            text-decoration-color: red;
+        }
+
+        .stores {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    <nav class="navbar">
+
+        <a href="index.html"><img src="heading___logo_tesla.png" class="teslanavbar" /></a>
+
+    </nav>
+
+
+    <hr class="headerline" />
+
+
+    <div class="col-md-12 col-lg-12 col-sm-12">
+
+
+        <h3 id="tittle" class="bigtextwhite lato font-weight-bold">Get an email alert with a 7% price drop for Tesla
+        </h3>
+
+        <h3 id="current_price" class="teslaHeading latoNormal">  </h3>
+
+
+        <img id="icon" width="120" src="tesla.jpg" alt="App Store image" class="teslaImage center" />
+
+
+        <h3 id="subText" class="teslaHeading latoNormal">Price drop notfication for TSLA</h3>
+
+        <div class="form">
+            <input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required
+                class="center-block form-control email" aria-describedby="emailHelp" placeholder="Enter email">
+        </div>
+
+        <button id="submitButton" type="button" class="center-block teslaButton btn btn-primary">SET ALARM</button>
+
+
+        <div id="favDialog" class="teslaDialog">
+
+            <h3 id="tittle" class="center-block teslaHeadingDialog lato font-weight-bold">7% price drop alarm set</h3>
+
+            <img id="icon" width="120" src="tesla.jpg" alt="App Store image" class="teslaImage center" />
+
+            <h3 id="tittle" class="teslaHeadingDialog lato font-weight-bold">Set more custom Tesla alerts with our free
+                app</h3>
+
+            <div class="col text-center">
+                <button class="ctatesla center-mobile" type="button" id="makeDeeplinkBtn" >Download</button>
+
+            </div>
+            <div class="row text-center stores">
+                <div class="col-md-12 col-lg-6 col-sm-12 iconbutton">
+                    <a href="https://apps.apple.com/us/app/stock-alert-stock-signal/id1582553100">
+                        <img width="200" src="ios.png" alt="App Store image" />
+                    </a>
+                </div>
+                <div class="col-md-12 col-lg-6 col-sm-12 iconbutton">
+                    <a href="https://play.google.com/store/apps/details?id=com.stockalert.stockalarm">
+                        <img width="200" src="play.png" alt="Google Play image" />
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module">
+
+        import {initializeApp} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
+        import {getAnalytics, logEvent} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-analytics.js";
+        import {getAuth, onAuthStateChanged, createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
+
+        import {getDatabase, get, ref, set, push, child, update, remove} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDmM2hQHdeaSAITdh8rZv9o5raE7ydqPWs",
+            authDomain: "stock-alarm-f9527.firebaseapp.com",
+            databaseURL: "https://stock-alarm-f9527-default-rtdb.firebaseio.com",
+            projectId: "stock-alarm-f9527",
+            storageBucket: "stock-alarm-f9527.appspot.com",
+            messagingSenderId: "4729421077",
+            appId: "1:4729421077:web:0cd023c6ed2ee275b57d1c",
+            measurementId: "G-7VQLGGFLJ3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        var emailInput = document.getElementById("email");
+        var createAlarmBtn = document.getElementById("submitButton");
+        var downloadBtn = document.getElementById("makeDeeplinkBtn");
+        var subText = document.getElementById("subText");
+        var tittle = document.getElementById("tittle");
+        var icon = document.getElementById("icon");
+        var favDialog = document.getElementById('favDialog');
+        var currentPrice;
+
+
+        const auth = getAuth();
+        var uid = "";
+
+        logEvent(analytics, 'One page loaded');
+        logEvent(analytics, 'Tesla Target Price');
+
+
+        fetch('https://cloud.iexapis.com/stable/stock/TSLA/quote?token=pk_f4e72a4d9cfc4ced8084ea64725c3f52')
+            .then(response => response.json())
+            .then(data => updateCurrentPrice(data));
+
+
+        function updateCurrentPrice(data){
+            console.log("data.latestPrice :"  + data.latestPrice);
+            document.getElementById("current_price").textContent= ("Current price $" + data.latestPrice);
+            currentPrice = data.latestPrice;
+             
+        }
+
+        function addUser(alarmUUID, time) {
+
+            const db = getDatabase();
+            const dbRef = ref(db);
+
+            get(child(dbRef, `marketing_users/${uid}`)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    showSucssesMessage();
+                } else {
+                    console.error("!snapshot.exists()");
+
+                    set(ref(db, '/marketing_users/' + uid), {
+                        email: emailInput.value,
+                        subscriptionType: "FREE",
+                        alarmList: {
+                            [alarmUUID]: alarmUUID
+                        },
+                        timeCreated: time,
+                        phone:0,
+                        fcmID:"11ffdd"
+                    }).then(() => {
+                        showSucssesMessage();
+                    })
+                    .catch((error) => {
+
+                    });
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
+
+        }
+
+
+
+        function showSucssesMessage() {
+
+            document.getElementById("email").style.visibility = "hidden";
+            document.getElementById("submitButton").style.visibility = "hidden";
+            document.getElementById("subText").style.visibility = "hidden";
+            document.getElementById("tittle").style.visibility = "hidden";
+            document.getElementById("icon").style.visibility = "hidden";
+
+            favDialog.style.display = "inline";
+
+            logEvent(analytics, 'One page email collected');
+            logEvent(analytics, 'Tesla Target Price email collected');
+
+        }
+
+
+        function addAlarmToUser(alarmUUID) {
+
+            const db = getDatabase();
+            const postListRef = ref(db, '/marketing_users/' + uid + "/alarmList/");
+            const newPostRef = push(postListRef);
+            set(newPostRef, {
+                [newPostRef.key]: alarmUUID
+            });
+        }
+
+
+        function addAlarm(uid) {
+
+            const db = getDatabase();
+            const dbRef = ref(db);
+            get(child(dbRef, `marketing_users/${uid}`)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    showSucssesMessage();
+                } else {
+                    createAlarm();
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
+
+        }
+
+
+        function makeDeeplink() {
+            var muidDeepLink = "https://stockalarm.page.link/?apn=com.stockalert.stockalarm&ibi=com.stock.alarm.StockAlert&isi=1582553100&link=https%3A%2F%2Fgetsmartnotifications.com%2Faddalarm%3FdeepLinkID%3DONE_PAGE_TESLA_PERCENT_DROP%26deepLinkType%3Dmuid$%26marketingUID%3D"
+            console.log("makeDeeplink : " + uid);
+            console.log("URL : " + muidDeepLink + uid );
+            window.location.href = muidDeepLink + uid
+        }
+
+        function createAccount() {
+
+            const isValidEmail = emailInput.checkValidity();
+            const randPassword = create_UUID().substring(0, 8);
+
+            console.log("emailInput.value : " + emailInput.value);
+            console.log("password : " + randPassword);
+
+
+            if (isValidEmail) {
+                const auth = getAuth();
+                createUserWithEmailAndPassword(auth, emailInput.value, randPassword)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        uid = user.uid;
+                        console.log("user : " + user);
+                        createAlarm();
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        console.log("errorMessage : " + errorMessage);
+                    });
+            }
+        }
+
+        async function createAlarm() {
+
+            const db = getDatabase();
+
+            const alarmID = "TESLA_PERCENT_DROP_" + create_UUID();
+
+            var currentdate = new Date();
+            var formatedtime = (currentdate.getMonth() + 1) + '/'
+                + (currentdate.getDate()) + '/'
+                + currentdate.getFullYear() + ', '
+                + currentdate.getHours() + ':'
+                + currentdate.getMinutes() + ':'
+                + currentdate.getSeconds();
+
+            console.log("createAlarm : ");
+
+
+            await set(ref(db, '/alarms/' + alarmID), {
+                alarmID: alarmID,
+                notificationType: 'EMAIL',
+                alarmOn: true,
+                alarmTriggerCategory: 'PERCENT_CHANGE',
+                initialAmount: currentPrice,
+                current: currentPrice,
+                extendedHours: false,
+                companyLogo: 'https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2020/06/931/524/TESLA-LOGO.jpg?ve=1&tl=1',
+                stockName: 'Tesla Inc',
+                lowerLimit: -7,
+                subscriptionStatus: "FREE",
+                subAlertType: "PERCENT_CHANGE_FROM_CURRENT",
+                targetPrice: 0,
+                targetHit: null,
+                upperLimit: 0,
+                stockId: 'TSLA',
+                alarmDescription: 'Triggered with a 7% price drop',
+                testCurrent: 0,
+                timeUpdated: formatedtime,
+                userID: uid,
+            }).then(() => {
+                addUser(alarmID, Date.now());
+            })
+            .catch((error) => {
+                console.log("error : " + error);
+                addUser(alarmID, Date.now());
+            });
+        }
+
+        function create_UUID() {
+            var dt = new Date().getTime();
+            var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = (dt + Math.random() * 16) % 16 | 0;
+                dt = Math.floor(dt / 16);
+                return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            });
+            return uuid;
+        }
+
+        createAlarmBtn.addEventListener('click', createAccount)
+        downloadBtn.addEventListener('click', makeDeeplink)
+
+
+
+    </script>
+
+
+
+
+</body>
+
+
+
+</html>
