@@ -181,7 +181,7 @@
                 get: (searchParams, prop) => searchParams.get(prop),
             });
            
-            targetPrice = params.targetPrice;
+            targetPrice = Number.parseFloat(params.targetPrice).toFixed(2);
             referer = params.referer;
 
             console.log("targetPrice " +  targetPrice);
