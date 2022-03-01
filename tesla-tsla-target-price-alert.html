@@ -181,7 +181,7 @@
                 get: (searchParams, prop) => searchParams.get(prop),
             });
            
-            targetPrice = Number.parseFloat(params.targetPrice).toFixed(2);
+            targetPrice = Number.parseFloat(params.targetPrice).toFixed(2);  
             referer = params.referer;
 
             console.log("targetPrice " +  targetPrice);
@@ -344,7 +344,7 @@
                 lowerLimit: 0,
                 subscriptionStatus: "FREE",
                 subAlertType: "",
-                targetPrice: targetPrice,
+                targetPrice: parseFloat(targetPrice),
                 targetHit: targetHit,
                 upperLimit: 0,
                 stockId: 'TSLA',
