@@ -9,11 +9,13 @@
     <link rel="icon" href="https://imgur.com/VjN344H.png">
 
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="js/app.js" defer></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     <link rel="stylesheet" href="mycss.css">
 
     <meta property="og:image" content="https://i.imgur.com/kBxfIpX.png" />
@@ -89,7 +91,7 @@
                 <a class="nav-link faq lato font-weight-bold text-my-own-color" href="faq.html">FAQ</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link faq lato font-weight-bold text-my-own-color" href="mailto:epop.bill@gmail.com">CONTACT</a>
+                <a class="nav-link faq lato font-weight-bold text-my-own-color" href="#ex1" rel="modal:open">CONTACT</a>
             </li>
         </ul>
     </nav>
@@ -135,7 +137,16 @@
         </div>
 
     </div>
-
+    <div id="ex1" class="modal" style="height:auto;">
+        <h5>Members</h5>
+        William R.<br />
+        Co-founder, lead developer, and CTO. <a href="mailto:epop.bill@gmail.com">Contact</a><br /><br />
+        Spensor Depas<br />
+        Co-founder, Front-end developer, and project manager.<br /><br />
+        Michael Louis<br />
+        Marketing research analyst. <a href="mailto:michaellouis010101">Contact</a><br /><br />
+        <a href="#" rel="modal:close">Close</a>
+    </div>
 </body>
 
 
